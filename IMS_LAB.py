@@ -3,8 +3,6 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
-from matplotlib.figure import Figure as f
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg as fct
 import IMS
 
 app =ctk.CTk()
@@ -55,7 +53,7 @@ def deleted():
         IMS.delete_Product(id)
         add_to_treeview()
         clear()
-        messagebox.showerror('Success','Data has been deleted')
+        messagebox.showinfo('Success','Data has been deleted')
 
 def update():
     selected_item=tree.focus()
@@ -83,7 +81,7 @@ def insert():
     else:
         try:
             stock_val=int(stock)
-            price_val=int(price)
+            price_val=float(price)
             IMS.insert_Product(id,name,stock_val,price_val)
             add_to_treeview()
             clear()
@@ -136,13 +134,13 @@ style.configure('Treeview',font=font3, foreground='#fff',background='0A0B0C', fi
 style.map('Treeview',background=[('selected','#AA04A7')])
 
 tree = ttk.Treeview(app,height = 20)
-tree['columns']=('ID','Name','stock','Price')
+tree['columns']=('id','Name','stock','Price')
 tree.column('#0', width=0, stretch =tk.NO)
-tree.column('ID', anchor=tk.CENTER, width=150)
+tree.column('id', anchor=tk.CENTER, width=150)
 tree.column('Name', anchor=tk.CENTER, width=150)
 tree.column('stock', anchor=tk.CENTER, width=150)
 tree.column('Price', anchor=tk.CENTER, width=150)
-tree.heading('ID', text='ID')
+tree.heading('id', text='ID')
 tree.heading('Name',text='Name')
 tree.heading('stock',text='Stock')
 tree.heading('Price',text='Price')
